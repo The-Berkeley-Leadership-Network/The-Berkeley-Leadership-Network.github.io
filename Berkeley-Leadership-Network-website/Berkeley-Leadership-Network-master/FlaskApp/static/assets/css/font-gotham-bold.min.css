@@ -1,0 +1,19 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+@font-face {
+    font-family: 'gotham-bold-regular';
+    src: url(..\static\assets\fonts\GothamFont\GOTHAM-BOLD.ttf) format('truetype');
+    font-weight: normal;
+    font-style: bold;
+	}
+
+h1 {
+font-family: gotham-bold-regular;
+font-weight:1000;
+}

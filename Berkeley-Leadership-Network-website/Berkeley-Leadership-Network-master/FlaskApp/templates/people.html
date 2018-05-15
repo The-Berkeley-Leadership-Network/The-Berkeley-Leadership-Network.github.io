@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html ng-app="webApp">
+	<head>
+		<title>Berkeley Leadership Network</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="static/assets/css/main.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+		
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+		<script src="static/main.js"></script>
+		<!-- <script src="{{ url_for('static', filename='main.js') }}"></script> -->
+	</head>
+	<body ng-controller="webAppController">
+
+		<!-- Content -->
+			<div id="content" style="margin-left:11em;">
+				<div class="inner">
+					<section class="box search">
+						<form method="post" id="location-search">
+							<input type="text" ng-model='searchLocation' class="text" name="search" placeholder="Search for a location... (Eg. San Francisco)" />
+						</form>
+						<br>
+						<form method="post" id="industry-search">
+							<input type="text" ng-model='searchIndustry' class="text" name="search" placeholder="Search for an industry... (Eg. Internet)" />
+						</form>
+						<br>
+						<form method="post" id="job-search">
+							<input type="text" ng-model='searchJob' class="text" name="search" placeholder="Search for a job title... (Eg. Investor)" />
+						</form>
+						<br>
+						<form method="post" id="stage-search">
+							<input type="text" ng-model='searchStage' class="text" name="search" placeholder="Search for an investment stage... (Eg. Series A)" />
+						</form>
+					</section>
+					<!-- Post -->
+					<article class="box post post-excerpt" id="info" ng-if="data.length > 0">
+						<table class="table table-advance table-striped table-bordered" style="margin-top: 10px;">
+							{% raw %}
+							<tr>
+								<td ng-if="key !='First' && key != 'Bio' && key != 'Row for Picture'" ng-repeat="(key, value) in data[0]"> {{ key }} </td>
+							</tr>
+							<tr ng-repeat="person in data | filter:search(searchLocation, searchIndustry, searchJob, searchStage)">
+								<th href="/profile/{{person['First']}}" ng-repeat="(key, value) in person" ng-if="key !='First' && key != 'Bio' && key != 'Row for Picture'">
+									<a ng-if="key =='Full Name'" href="/profile/{{person['Full Name']}}"
+										ng-click="changeProfile(person)"> {{ value }} </a>
+									<span ng-if="key !='Full Name' && key != 'Bio' && key != 'Row for Picture'"> {{ value }} </span>
+								</th>
+							</tr>
+							{% endraw %}
+						</table>
+					</article>
+
+					<!-- Pagination -->
+
+
+				</div>
+			</div>
+
+		<!-- Sidebar -->
+
+		<!-- Scripts -->
+			<script src="static/assets/js/jquery.min.js"></script>
+			<script src="static/assets/js/skel.min.js"></script>
+			<script src="static/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="static/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="static/assets/js/main.js"></script>
+
+	</body>
+</html>
